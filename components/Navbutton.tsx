@@ -16,6 +16,7 @@ const Navbutton = ({ label, href, Icon }: NavbuttonProps) => {
       aria-label={label}
       title={label}
       asChild
+      className="rounded-full"
     >
       {href ? (
         <Link href={href}>
