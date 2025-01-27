@@ -2,6 +2,7 @@ import BackButton from "@/components/BackButton";
 import { customer } from "@/db/schema";
 import { getCustomer } from "@/lib/queries/getCustomer";
 import { getTicket } from "@/lib/queries/getTicket";
+import TicketForm from "./TicketForm";
 
 const TicketFormPage = async ({
   searchParams,
@@ -42,6 +43,7 @@ const TicketFormPage = async ({
       );
     }
     //Going to show form for creating new ticket.
+    return <TicketForm customer={customerFound} />;
   }
   if (ticketId) {
     const ticketFound = await getTicket(parseInt(ticketId));
@@ -55,8 +57,9 @@ const TicketFormPage = async ({
         </>
       );
     }
-    const customer = await getCustomer(ticketFound.customerId);
+    const customerFound = await getCustomer(ticketFound.customerId);
     //Going to show form for found ticket
+    return <TicketForm customer={customerFound} ticket={ticketFound} />;
   }
 };
 

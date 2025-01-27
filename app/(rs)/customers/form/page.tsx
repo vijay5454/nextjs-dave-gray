@@ -1,5 +1,6 @@
 import { getCustomer } from "@/lib/queries/getCustomer";
 import BackButton from "@/components/BackButton";
+import CustomerForm from "./CustomerForm";
 
 export default async function CustomerFormPage({
   searchParams,
@@ -21,10 +22,11 @@ export default async function CustomerFormPage({
         );
       } else {
         //Going to use form for existing customer
-        return <p>{JSON.stringify(customerFound)}</p>;
+        return <CustomerForm customer={customerFound} />;
       }
     } else {
       //Going to use form for new customer
+      return <CustomerForm />;
     }
   } catch (error) {
     if (error instanceof Error) {
