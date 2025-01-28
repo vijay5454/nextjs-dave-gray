@@ -3,9 +3,9 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 export const insertCustomerSchema = createInsertSchema(customer, {
   firstName: (schema) => schema.min(1, "First name is required."),
-  lastName: (schema) => schema.min(1, "First name is required."),
-  address1: (schema) => schema.min(1, "First name is required."),
-  city: (schema) => schema.min(1, "First name is required."),
+  lastName: (schema) => schema.min(1, "Last name is required."),
+  address1: (schema) => schema.min(1, "1st Address is required."),
+  city: (schema) => schema.min(1, "City Name is required."),
   state: (schema) => schema.length(2, "Required exactly 2 characters."),
   zip: (schema) => schema.length(6, "Required exactly 6 characters."),
   phone: (schema) =>

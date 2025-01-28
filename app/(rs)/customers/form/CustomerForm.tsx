@@ -8,6 +8,8 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
+import InputWithLabel from "@/components/inputs/InputWithLabel";
+import { Button } from "@/components/ui/button";
 
 const CustomerForm = ({
   customer,
@@ -41,8 +43,58 @@ const CustomerForm = ({
         <h2>{customer?.id ? "Edit " : "New "} Customer Form</h2>
       </div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(submitForm)}>
-          <p>{JSON.stringify(form.getValues())}</p>
+        <form onSubmit={form.handleSubmit(submitForm)} className="flex gap-10">
+          <div className="flex flex-col gap-3">
+            <InputWithLabel<insertCustomerSchemaType>
+              fieldTitle="First Name"
+              nameInSchema="firstName"
+            />
+            <InputWithLabel<insertCustomerSchemaType>
+              fieldTitle="Last Name"
+              nameInSchema="lastName"
+            />
+            <InputWithLabel<insertCustomerSchemaType>
+              fieldTitle="1st Address"
+              nameInSchema="address1"
+            />
+            <InputWithLabel<insertCustomerSchemaType>
+              fieldTitle="2nd Address"
+              nameInSchema="address2"
+            />
+            <InputWithLabel<insertCustomerSchemaType>
+              fieldTitle="City"
+              nameInSchema="city"
+            />
+          </div>
+          <div className="flex flex-col gap-3">
+            <InputWithLabel<insertCustomerSchemaType>
+              fieldTitle="Postal Code"
+              nameInSchema="zip"
+            />
+            <InputWithLabel<insertCustomerSchemaType>
+              fieldTitle="Email"
+              nameInSchema="email"
+            />
+            <InputWithLabel<insertCustomerSchemaType>
+              fieldTitle="Phone"
+              nameInSchema="phone"
+            />
+            <div className="w-full flex gap-4">
+              <Button type="submit" title="Save" className="w-3/4">
+                Save
+              </Button>
+              <Button
+                type="reset"
+                title="Reset"
+                variant="destructive"
+                onClick={() => {
+                  form.reset(defaultValues);
+                }}
+              >
+                Reset
+              </Button>
+            </div>
+          </div>
         </form>
       </Form>
     </div>
