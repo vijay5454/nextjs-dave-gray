@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import InputWithLabel from "@/components/inputs/InputWithLabel";
 import { Button } from "@/components/ui/button";
+import TextAreaWithLabel from "@/components/inputs/TextAreaWithLabel";
 
 const CustomerForm = ({
   customer,
@@ -39,12 +40,17 @@ const CustomerForm = ({
   };
   return (
     <div>
-      <div>
-        <h2>{customer?.id ? "Edit " : "New "} Customer Form</h2>
+      <div className="max-w-[80%] mx-auto my-2">
+        <h2 className="font-semibold text-xl">
+          {customer?.id ? "Edit " : "New "} Customer Form
+        </h2>
       </div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(submitForm)} className="flex gap-10">
-          <div className="flex flex-col gap-3">
+        <form
+          onSubmit={form.handleSubmit(submitForm)}
+          className="flex gap-10 max-w-[80%] mx-auto"
+        >
+          <div className="flex flex-col gap-3 flex-1">
             <InputWithLabel<insertCustomerSchemaType>
               fieldTitle="First Name"
               nameInSchema="firstName"
@@ -66,7 +72,7 @@ const CustomerForm = ({
               nameInSchema="city"
             />
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 flex-1">
             <InputWithLabel<insertCustomerSchemaType>
               fieldTitle="Postal Code"
               nameInSchema="zip"
@@ -78,6 +84,11 @@ const CustomerForm = ({
             <InputWithLabel<insertCustomerSchemaType>
               fieldTitle="Phone"
               nameInSchema="phone"
+            />
+            <TextAreaWithLabel<insertCustomerSchemaType>
+              fieldTitle="Notes"
+              nameInSchema="notes"
+              rows={10}
             />
             <div className="w-full flex gap-4">
               <Button type="submit" title="Save" className="w-3/4">
