@@ -11,6 +11,8 @@ import { Form } from "@/components/ui/form";
 import InputWithLabel from "@/components/inputs/InputWithLabel";
 import { Button } from "@/components/ui/button";
 import TextAreaWithLabel from "@/components/inputs/TextAreaWithLabel";
+import SelectWithLabel from "@/components/inputs/SelectWithLabel";
+import indianStates from "@/constants/StatesArray";
 
 const CustomerForm = ({
   customer,
@@ -70,6 +72,12 @@ const CustomerForm = ({
             <InputWithLabel<insertCustomerSchemaType>
               fieldTitle="City"
               nameInSchema="city"
+            />
+            <SelectWithLabel<insertCustomerSchemaType>
+              fieldTitle="State"
+              nameInSchema="state"
+              data={indianStates}
+              className="w-[65%]"
             />
           </div>
           <div className="flex flex-col gap-3 flex-1">
