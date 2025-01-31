@@ -7,11 +7,11 @@ import {
   type selectTicketSchemaType,
 } from "@/zod-schemas/tickets";
 import TextAreaWithLabel from "@/components/inputs/TextAreaWithLabel";
-import SelectWithLabel from "@/components/inputs/SelectWithLabel";
 import InputWithLabel from "@/components/inputs/InputWithLabel";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
+import CheckboxWithLabel from "@/components/inputs/CheckboxWithLabel";
 
 type Props = {
   ticket?: selectTicketSchemaType;
@@ -56,7 +56,12 @@ const TicketForm = ({ ticket, customer }: Props) => {
             <InputWithLabel<insertTicketSchemaType>
               fieldTitle="Tech"
               nameInSchema="tech"
-              readOnly={true}
+              disabled={true}
+            />
+            <CheckboxWithLabel<insertTicketSchemaType>
+              fieldTitle="Completed"
+              nameInSchema="completed"
+              message="Yes"
             />
             <div className="space-y-3">
               <h3>Customer Info</h3>
