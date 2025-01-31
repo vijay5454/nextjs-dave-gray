@@ -6,8 +6,12 @@ import {
   type insertTicketSchemaType,
   type selectTicketSchemaType,
 } from "@/zod-schemas/tickets";
+import TextAreaWithLabel from "@/components/inputs/TextAreaWithLabel";
+import SelectWithLabel from "@/components/inputs/SelectWithLabel";
+import InputWithLabel from "@/components/inputs/InputWithLabel";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   ticket?: selectTicketSchemaType;
@@ -33,15 +37,65 @@ const TicketForm = ({ ticket, customer }: Props) => {
   };
   return (
     <div>
-      <div>
-        <h2>
+      <div className="max-w-[80%] mx-auto my-2">
+        <h2 className="font-semibold text-xl">
           {ticket?.id ? "Edit " : "New "}Ticket{" "}
           {ticket?.id ? `#${ticket.id}` : "Form"}
         </h2>
       </div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(submitForm)}>
-          <p>{JSON.stringify(form.getValues())}</p>
+        <form
+          onSubmit={form.handleSubmit(submitForm)}
+          className="flex gap-10 max-w-[80%] mx-auto"
+        >
+          <div className="flex flex-col gap-3 flex-1">
+            <InputWithLabel<insertTicketSchemaType>
+              fieldTitle="Title"
+              nameInSchema="title"
+            />
+            <InputWithLabel<insertTicketSchemaType>
+              fieldTitle="Tech"
+              nameInSchema="tech"
+              readOnly={true}
+            />
+            <div className="space-y-3">
+              <h3>Customer Info</h3>
+              <hr className="w-4/5" />
+              <p>
+                {customer.firstName} {customer.lastName}
+              </p>
+              <p>{customer.address1}</p>
+              {customer.address2 && <p>{customer.address2}</p>}
+              <p>
+                {customer.city}, {customer.state}, {customer.zip}
+              </p>
+              <hr className="w-4/5" />
+              <p>Email: {customer.email}</p>
+              <p>Phone: {customer.phone}</p>
+            </div>
+          </div>
+          <div className="flex flex-col gap-3 flex-1">
+            <TextAreaWithLabel<insertTicketSchemaType>
+              fieldTitle="Description"
+              nameInSchema="description"
+              rows={15}
+            />
+            <div className="w-full flex justify-between">
+              <Button type="submit" title="Save" className="w-[80%]">
+                Save
+              </Button>
+              <Button
+                type="reset"
+                title="Reset"
+                variant="destructive"
+                onClick={() => {
+                  form.reset(defaultValues);
+                }}
+              >
+                Reset
+              </Button>
+            </div>
+          </div>
         </form>
       </Form>
     </div>
